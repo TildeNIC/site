@@ -1,0 +1,130 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    margin: 0;
+    padding: 20px;
+    color: #0f0; /* Green text, typical of classic terminals */
+}
+
+h1, h2 {
+    color: #0f0;
+    border-bottom: 1px solid #0f0;
+    padding-bottom: 10px;
+}
+.content {
+    background-color: #222; /* Darker background for content */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.info-section, .server-list {
+    margin-bottom: 20px;
+}
+
+form {
+    background: #000; /* Black background */
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #0f0; /* Green border */
+    box-shadow: none;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    background: #222; /* Dark gray background */
+    border: 1px solid #0f0; /* Green border */
+    color: #0f0; /* Green text */
+    border-radius: 0; /* Square corners */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input[type="submit"],
+input[type="button"] {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #222; /* Dark gray background */
+    color: #0f0; /* Green text */
+    border: 1px solid #0f0; /* Green border */
+    cursor: pointer;
+    display: inline-block;
+    width: auto;
+    border-radius: 0; /* Square corners */
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #333; /* Slightly lighter gray */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+li {
+    background: #000; /* Black background */
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid #0f0; /* Green border */
+    box-shadow: none;
+    border-radius: 0; /* Square corners */
+}
+
+a {
+    color: #4af;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #7cf;
+}
+
+        .status {
+            font-weight: bold;
+        }
+        .online {
+            color: green;
+        }
+        .offline {
+            color: red;
+        }
+
+/* Centering form buttons */
+form {
+    text-align: center;
+}
+
+/* Aligning form inputs to the left */
+form input[type="text"],
+form input[type="password"] {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+        .domain-input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .tilde-extension {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 0 4px 4px 0; /* Rounded right corners */
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+        .register-link {
+            color: #337ab7;
+            text-decoration: none;
+            font-weight: bold;
+        }
