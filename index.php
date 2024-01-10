@@ -1,6 +1,6 @@
 <?php
 // Define the default page
-$defaultPage = 'domain_search';
+$defaultPage = 'main';
 
 // Get the requested page from the query parameter
 $page = isset($_GET['page']) ? $_GET['page'] : $defaultPage;
