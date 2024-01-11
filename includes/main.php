@@ -13,12 +13,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 function getDnsServersInfo() {
     $masterFile = '../dottilde/db.master.tilde';
     $servers = [];
-    $nsFilter = ['ns1', 'ns2']; // Add more nameserver identifiers as needed
+    $nsFilter = ['ns1', 'ns2','ns3']; // Add more nameserver identifiers as needed
 
       // Manually assigned geographical areas for each nameserver
     $nsGeographicalAreas = [
         'ns1' => 'Quebec, Canada', // Replace with actual locations
         'ns2' => 'Frankfurt, Germany',
+        'ns3' => 'Sydney, Australia',
         // Add more as needed
     ];
   
