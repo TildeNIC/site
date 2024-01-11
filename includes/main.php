@@ -53,16 +53,28 @@ function getDnsServersInfo() {
 $dnsServers = getDnsServersInfo();
 
 // Function to check server status
-function checkServerStatus($server) {
+//function checkServerStatus($server) {
     // Ping command varies depending on the operating system
     // This is an example for a Unix-like system
-    $output = [];
-    $status = null;
-    exec("ping -c 1 " . escapeshellarg($server), $output, $status);
+//    $output = [];
+//    $status = null;
+//    exec("ping -c 1 -W 5000 " . escapeshellarg($server), $output, $status);
+//
+//    return $status === 0 ? "Online" : "Offline";
+//}
+function checkServerStatus($server) {
+    $port = 53; // DNS port, change if necessary
+    $timeout = 5; // Timeout in seconds
 
-    return $status === 0 ? "Online" : "Offline";
+    $fp = @fsockopen($server, $port, $errno, $errstr, $timeout);
+
+    if ($fp) {
+        fclose($fp);
+        return "Online";
+    } else {
+        return "Offline";
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
