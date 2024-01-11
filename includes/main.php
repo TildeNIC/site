@@ -15,6 +15,13 @@ function getDnsServersInfo() {
     $servers = [];
     $nsFilter = ['ns1', 'ns2']; // Add more nameserver identifiers as needed
 
+      // Manually assigned geographical areas for each nameserver
+    $nsGeographicalAreas = [
+        'ns1' => 'Quebec, Canada', // Replace with actual locations
+        'ns2' => 'Frankfurt, Germany',
+        // Add more as needed
+    ];
+  
     if (file_exists($masterFile)) {
         $content = file_get_contents($masterFile);
         // Regex to match A records (IPv4)
@@ -26,19 +33,16 @@ function getDnsServersInfo() {
         $ipv6Records = array_combine($aaaaMatches[1], $aaaaMatches[2]);
 
         foreach ($nsFilter as $nsName) {
-            if (isset($ipv4Records[$nsName])) {
-                $ipv4 = $ipv4Records[$nsName];
-            } else {
-                $ipv4 = 'IPv4 not found';
-            }
+            $ipv4 = isset($ipv4Records[$nsName]) ? $ipv4Records[$nsName] : 'IPv4 not found';
+            $ipv6 = isset($ipv6Records[$nsName]) ? $ipv6Records[$nsName] : 'IPv6 not found';
+            $geographicalArea = isset($nsGeographicalAreas[$nsName]) ? $nsGeographicalAreas[$nsName] : 'Unknown Location';
 
-            if (isset($ipv6Records[$nsName])) {
-                $ipv6 = $ipv6Records[$nsName];
-            } else {
-                $ipv6 = 'IPv6 not found';
-            }
-
-            $servers[] = ['hostname' => $nsName, 'ipv4' => $ipv4, 'ipv6' => $ipv6];
+            $servers[] = [
+                'hostname' => $nsName, 
+                'ipv4' => $ipv4, 
+                'ipv6' => $ipv6, 
+                'location' => $geographicalArea
+            ];
         }
     }
 
@@ -108,16 +112,16 @@ function checkServerStatus($server) {
         <div class="server-list">
             <h2>TildeNIC Available DNS Servers</h2>
             <ul>
-              
-    <?php foreach ($dnsServers as $server): ?>
-        <li>
-            <?php echo htmlspecialchars($server['hostname']); ?> - 
-            IPv4: <?php echo htmlspecialchars($server['ipv4']); ?>, 
-            IPv6: <?php echo htmlspecialchars($server['ipv6']); ?> - 
-            <span class="status <?php echo checkServerStatus($server['hostname']) === 'Online' ? 'online' : 'offline'; ?>">
-                <?php echo checkServerStatus($server['hostname']); ?>
-            </span>
-        </li>
+                <?php foreach ($dnsServers as $server): ?>
+                    <li>
+                        <?php echo htmlspecialchars($server['hostname']); ?> - 
+                        IPv4: <?php echo htmlspecialchars($server['ipv4']); ?>, 
+                        IPv6: <?php echo htmlspecialchars($server['ipv6']); ?>,
+                        Location: <?php echo htmlspecialchars($server['location']); ?> - 
+                        <span class="status <?php echo checkServerStatus($server['hostname']) === 'Online' ? 'online' : 'offline'; ?>">
+                            <?php echo checkServerStatus($server['hostname']); ?>
+                        </span>
+                    </li>
     <?php endforeach; ?>
             </ul>
         </div>
