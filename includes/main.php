@@ -64,7 +64,7 @@ $dnsServers = getDnsServersInfo();
 //}
 function checkServerStatus($server) {
     $port = 53; // DNS port, change if necessary
-    $timeout = 5; // Timeout in seconds
+    $timeout = 10; // Timeout in seconds
 
     $fp = @fsockopen($server, $port, $errno, $errstr, $timeout);
 
