@@ -53,15 +53,6 @@ function getDnsServersInfo() {
 $dnsServers = getDnsServersInfo();
 
 // Function to check server status
-//function checkServerStatus($server) {
-    // Ping command varies depending on the operating system
-    // This is an example for a Unix-like system
-//    $output = [];
-//    $status = null;
-//    exec("ping -c 1 -W 5000 " . escapeshellarg($server), $output, $status);
-//
-//    return $status === 0 ? "Online" : "Offline";
-//}
 function checkServerStatus($server) {
     $port = 53; // DNS port, change if necessary
     $timeout = 10; // Timeout in seconds
@@ -107,7 +98,6 @@ function checkServerStatus($server) {
             <ul>
                 <li><a href="https://tildegit.org/tildenic/.tilde/wiki/Setting-up-a-.tilde-DNS-server" target="_blank">Self-host information</a></li>
             </ul>
-            <p><strong>NOTE!</strong> None of the servers currently listed are functional. They are old IP addresses. New servers will be online very soon!</p>
                 <h3>
         <a href="https://opennic.org/" target="_blank">OpenNIC Information</a>
       </h3>      

@@ -3,9 +3,35 @@ require_once 'initdb.php';
 
 session_start();
 
+// Initialize error messages array if not set
+if (!isset($_SESSION['error_messages'])) {
+    $_SESSION['error_messages'] = [];
+}
+
+// Session timeout logic
+$timeout = 1800; // 30 minutes in seconds
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
+    // Last request was more than 30 minutes ago
+    session_unset(); // Unset $_SESSION variable
+    session_destroy(); // Destroy session data
+    header("Location: /?page=login"); // Redirect to login page
+    exit;
+}
+
+$_SESSION['last_activity'] = time(); // Update last activity time
+
+// Check if user IP or user agent has changed
+if ((isset($_SESSION['user_ip']) && $_SESSION['user_ip'] !== $_SERVER['REMOTE_ADDR']) ||
+    (isset($_SESSION['user_agent']) && $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'])) {
+    session_unset();
+    session_destroy();
+    header("Location: /?page=login");
+    exit;
+}
+
 // Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: https://tildenic.org/?page=login");
+    header("Location: /?page=login");
     exit;
 }
 
@@ -14,22 +40,41 @@ $restrictedDomains = ['master.tilde', 'nic.tilde', 'tilde.tilde']; // Add more a
 
 // Function to register domain
 function registerDomain($domain, $userId, $pdo, $restrictedDomains) {
+    // Ensure '.tilde' is appended only once
+    if (!str_ends_with($domain, '.tilde')) {
+        $domain .= '.tilde';
+    }
+
+    // Debug: Output the full domain name
+//    echo "Attempting to register domain: " . htmlspecialchars($domain) . "<br>";
+
+    // Validate domain format (excluding the '.tilde' part)
+    $domainNameWithoutSuffix = str_replace('.tilde', '', $domain);
+    if (!preg_match('/^[a-zA-Z0-9\-]+$/', $domainNameWithoutSuffix)) {
+//        echo "Error: Invalid domain format detected.<br>"; // Debug message
+        return "Error: Invalid domain format. Only letters, numbers, and hyphens are allowed.";
+    }
+
     if (in_array($domain, $restrictedDomains)) {
+//        echo "Error: Domain is restricted.<br>"; // Debug message
         return "Error: The domain '$domain' cannot be registered.";
     }
 
     try {
         $stmt = $pdo->prepare("INSERT INTO domains (user_id, domain_name) VALUES (?, ?)");
         $stmt->execute([$userId, $domain]);
+ //       echo "Domain registered successfully.<br>"; // Debug message
         return "Domain registered successfully: " . htmlspecialchars($domain);
     } catch (PDOException $e) {
+ //       echo "Database error occurred.<br>"; // Debug message
         if ($e->getCode() == 23000) {
-            return "Error: The domain '$domain' is already registered.";
-        } else {
-            return "Error: An error occurred while registering the domain.";
-        }
-    }
+            return"Error: The domain '$domain' is already registered.";
+} else {
+return "Error: An error occurred while registering the domain.";
 }
+}
+}
+
 
 // Function to get user ID
 function getUserId($username, $pdo) {

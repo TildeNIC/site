@@ -81,7 +81,7 @@ fclose($logFile);
 
 // Git commit and push if there are changes
 if ($changes) {
-//    exec('git add .');
-//    exec('git commit -m "Updated DNS files"');
-//    exec('git push origin master');
+    exec('git add .');
+    exec('git commit -m "Updated DNS files"');
+    exec('git push origin master');
 }

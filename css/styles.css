@@ -99,6 +99,18 @@ a:hover {
 form {
     text-align: center;
 }
+.error-messages {
+    background-color: #ffdddd;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.error-messages p {
+    margin: 5px 0;
+}
 
 /* Aligning form inputs to the left */
 form input[type="text"],
