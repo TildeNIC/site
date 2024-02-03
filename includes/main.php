@@ -138,4 +138,11 @@ function checkServerStatus($server) {
         </div>
     </div>
 </body>
+<footer>
+<!-- Tildeverse Banner Exchange code begin -->
+<div style="text-align: center;">
+  <iframe src="https://banner.tildeverse.org/work.php?ID=tildenic" width="468" height="60" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" target="_blank"></iframe>
+</div>
+<!-- Tildeverse Banner Exchange code end -->
+</footer>
 </html>
