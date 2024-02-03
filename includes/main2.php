@@ -52,22 +52,17 @@ function getDnsServersInfo() {
 
 $dnsServers = getDnsServersInfo();
 
-// Modified checkServerStatus function
+// Function to check server status
 function checkServerStatus($server) {
     $port = 53; // DNS port, change if necessary
-    $timeout = 30; // Timeout in seconds
-
-//     Debug: Output the server being checked
-#    echo "Checking status of server: $server<br>";
+    $timeout = 10; // Timeout in seconds
 
     $fp = @fsockopen($server, $port, $errno, $errstr, $timeout);
 
     if ($fp) {
         fclose($fp);
-#        echo "Server $server is Online<br>"; // Debug: Server is online
         return "Online";
     } else {
-#        echo "Server $server is Offline - Error: $errstr ($errno)<br>"; // Debug: Server is offline
         return "Offline";
     }
 }
@@ -84,15 +79,12 @@ function checkServerStatus($server) {
     <header>
         <nav>
             <?php if (!isset($_SESSION['username'])): ?>
-                <a href="/?page=main">Home</a> |
                 <a href="/?page=login">Login</a> |
-                <a href="/?page=register">Register</a> |
-                <a href="/?page=whois">WHOIS</a>
+                <a href="/?page=register">Register</a>
             <?php else: ?>
                 <a href="/?page=main">Home</a> |
                 <a href="/?page=user_domains">My Account</a> |
                 <a href="/?page=domain_register">Register Domain</a> |
-                <a href="/?page=whois">WHOIS</a> |
                 <a href="/?page=main&action=logout">Logout</a><br><br>
                 <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
             <?php endif; ?>

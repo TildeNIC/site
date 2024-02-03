@@ -42,12 +42,12 @@ function generateDnsFileContent($domain, $ipAddress) {
 chdir('../dottilde');
 
 // Perform a git pull to ensure the repository is up to date
-exec('git pull');
+exec('git pull 2>&1', $gitOutput, $gitStatus);
+writeToLog("Git Pull: " . implode("\n", $gitOutput), $logFile);
 
-// Fetch domains and generate DNS files
 $domains = getAllDomains($pdo);
 $changes = false;
-$currentFiles = glob('db.*'); // Get all current db files
+$currentFiles = glob('db.*');
 
 writeToLog("Current files before processing: " . implode(', ', $currentFiles), $logFile);
 
@@ -76,12 +76,16 @@ foreach ($currentFiles as $file) {
     $changes = true;
 }
 
-// Close the log file
-fclose($logFile);
-
-// Git commit and push if there are changes
 if ($changes) {
-    exec('git add .');
-    exec('git commit -m "Updated DNS files"');
-    exec('git push origin master');
+    exec('git add . 2>&1', $gitAddOutput, $gitAddStatus);
+    writeToLog("Git Add: " . implode("\n", $gitAddOutput), $logFile);
+
+    exec('git commit -m "Updated DNS files" 2>&1', $gitCommitOutput, $gitCommitStatus);
+    writeToLog("Git Commit: " . implode("\n", $gitCommitOutput), $logFile);
+
+    exec('git push origin master 2>&1', $gitPushOutput, $gitPushStatus);
+    writeToLog("Git Push: " . implode("\n", $gitPushOutput), $logFile);
 }
+
+fclose($logFile);
+?>

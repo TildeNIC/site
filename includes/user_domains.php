@@ -199,11 +199,13 @@ $domains = getUserDomains($userId, $pdo);
         <nav>
             <?php if (!isset($_SESSION['username'])): ?>
                 <a href="https://tildenic.org/?page=login">Login</a> |
-                <a href="https://tildenic.org/?page=register">Register</a>
+                <a href="https://tildenic.org/?page=register">Register</a> |
+                <a href="/?page=whois">WHOIS</a>
             <?php else: ?>
                 <a href="https://tildenic.org/?page=main">Home</a> |
                 <a href="https://tildenic.org/?page=user_domains" active>My Account</a> |
                 <a href="https://tildenic.org/?page=domain_register">Register Domain</a> |
+                <a href="/?page=whois">WHOIS</a> |
                 <a href="https://tildenic.org/?page=main&action=logout">Logout</a><br><br>
                 <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
             <?php endif; ?>
