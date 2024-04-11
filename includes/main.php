@@ -103,7 +103,7 @@ function checkServerStatus($server) {
         <div class="info-section">
             <p>TildeNIC is where you can request your .tilde top level domain. To do so, you need to first change your DNS over to one of the resolvers we offer, or you can self-host one.</p>
             <ul>
-                <li><a href="https://tildegit.org/tildenic/.tilde/wiki/Setting-up-a-.tilde-DNS-server" target="_blank">Self-host information</a></li>
+                <li><a href="https://github.com/TildeNIC/.tilde/wiki/Setting-up-a-.tilde-DNS-server" target="_blank">Self-host information</a></li>
             </ul>
                 <h3>
         <a href="https://opennic.org/" target="_blank">OpenNIC Information</a>
