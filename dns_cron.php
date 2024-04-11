@@ -37,7 +37,6 @@ function generateDnsFileContent($domain, $ipAddress) {
     $content .= ";\n";
     $content .= "@       IN      NS      ns1.master.tilde.\n";
     $content .= "@       IN      NS      ns2.master.tilde.\n";
-    $content .= "@       IN      NS      ns3.master.tilde.\n";
     $content .= "www     IN      CNAME   $domain\n";
     $content .= "@       IN      A       $ipAddress\n";
     $content .= "*       IN      A       $ipAddress\n";  // Wildcard A record
